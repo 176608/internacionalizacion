@@ -15,7 +15,7 @@
     <a href="tablas/evento.php">Eventos próximos</a>
     <a href="tablas/contacto.php">Contactos</a>
     <a href="tablas/contacto_correo.php">Correos</a>
-    <a href="tablas/consorcio.php">Consorcios</a>
+    <a href="consorcio/tabla.php">Consorcios</a>
     <?php include_once 'static/footer.php' ?>
 </body>
 </html>
