@@ -1,6 +1,5 @@
 
 <?php
-include('views/head.php');
 include('views/header.php');
 include('_assets/conn.php');
 ?>
@@ -8,7 +7,7 @@ include('_assets/conn.php');
 <!-- Cuerpo -->
 <div class="container-fluid">
     <h1>Hola, mundo!</h1>
-    <p>Este es el cuerpo de la página principal.</p>
+    <p>Index.</p>
 </div>
 
 <!-- Tabla de prueba -->
