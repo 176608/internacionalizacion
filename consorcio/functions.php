@@ -20,11 +20,19 @@ $conn = db();
 
 $sql = "SELECT * FROM consorcio";
 $result = $conn->query($sql);
-    echo "<table>";
+    echo '<table class="rwd-table">';
+    echo "<tr>";
+    echo  "<th>ID</th>";
+    echo  "<th>Nombre</th>";
+    echo  "<th>Enlace</th>";
+    echo  "<th>Tipo</th>";
+    echo  "<th>Procedencia</th>";
+    echo  "<th>Instrumento</th>";
+    echo "</tr>";
 if ($result->num_rows > 0) {
   // output data of each row
   while($row = $result->fetch_assoc()) {
-
+    
     echo "<tr>";
     echo "<td>".$row["id_consorcio"]." - ".$row["Siglas"]."</td>";
     echo "<td>".$row["Nombre"]."</td>";
