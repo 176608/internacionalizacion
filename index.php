@@ -1,28 +1,57 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<?php include_once 'static/head.php' ?>
-        <!-- Template Stylesheet -->
-        <link href="css/style.css" rel="stylesheet">
-    <title>Index</title>
-</head>
-<body>
 
-<nav class="navbar navbar-light bg-light">
-  <a class="navbar-brand" href="#" class="">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Escudo_UACJ.svg/2048px-Escudo_UACJ.svg.png" width="40" height="40" class="d-inline-block align-top" alt="">
-    UACJ Sistema -Navbar
-  </a>
-</nav>
+<?php
+include('views/head.php');
+include('views/header.php');
+include('_assets/conn.php');
+?>
 
-<div class="container-fluid bg-warning text-dark" >
-    <H1>TEST</H1>
+<!-- Cuerpo -->
+<div class="container-fluid">
+    <h1>Hola, mundo!</h1>
+    <p>Este es el cuerpo de la página principal.</p>
 </div>
 
-<div class="container bg-info text-white" >
-    <H1>TEST</H1>
+<!-- Tabla de prueba -->
+<div class="container-fluid">
+<?php
+$query = "SELECT id_consorcio, Siglas, Nombre, Enlace FROM consorcio";
+$resultado = mysqli_query($conn, $query);
+if ($resultado) {
+// Iniciar la tabla HTML
+echo '<table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#ID</th>
+                <th scope="col">Siglas</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Enlace</th>
+            </tr>
+        </thead>
+        <tbody>';
+// Iterar sobre los resultados
+while ($fila = mysqli_fetch_assoc($resultado)) {
+    echo '<tr>
+            <td>' . $fila['id_consorcio'] . '</td>
+            <td>' . $fila['Siglas'] . '</td>
+            <td>' . $fila['Nombre'] . '</td>
+            <td>' . $fila['Enlace'] . '</td>
+          </tr>';
+}
+// Cerrar la tabla HTML
+echo '</tbody>
+    </table>';
+} else {
+    // Manejar el caso en que la consulta no fue exitosa
+    echo 'Error en la consulta: ' . mysqli_error($conn);
+}
+
+// Cerrar la conexión a la base de datos
+mysqli_close($conn);
+?>
+
 </div>
 
-<?php include_once 'static/footer.php' ?>
-</body>
-</html>
+<?php
+include('views/footer.php');
+?>
+
