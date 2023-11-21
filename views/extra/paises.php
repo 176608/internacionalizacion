@@ -1,8 +1,11 @@
 <?php
 include('../../_assets/conn.php');
 $query_paises = "SELECT id_pais, Pais FROM pais";
-$resultado_paises = mysqli_query($conn, $query_paises);
+$resultado_paises = mysqli_query($conn, $query_paises); ?>
 
+<div class="container d-grid gap-2 mb-2"><button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Agregar Pais </button></div>
+
+<?php
 if ($resultado_paises) {
     // Iniciar la tabla HTML
     echo '<table class="table" id="paises_tabla" class="display" style="width:100%">

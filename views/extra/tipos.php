@@ -2,6 +2,11 @@
 include('../../_assets/conn.php');
 $query_tipos = "SELECT id_tipo_consorcio, tipo FROM consorcio_tipo";
 $resultado_tipos = mysqli_query($conn, $query_tipos);
+?>
+
+<div class="container d-grid gap-2 mb-2"><button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Agregar Tipo </button></div>
+
+<?php
 
 if ($resultado_tipos) {
     // Iniciar la tabla HTML

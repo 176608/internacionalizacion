@@ -3,6 +3,12 @@ include('../../_assets/conn.php');
     $query_instrumentos = "SELECT id_instrumento, instrumento FROM consorcio_instrumento";
     $resultado_instrumentos = mysqli_query($conn, $query_instrumentos);
 
+    ?>
+
+    <div class="container d-grid gap-2 mb-2"><button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Agregar Instrumento </button></div>
+    
+    <?php
+
     if ($resultado_instrumentos) {
         // Iniciar la tabla HTML
         echo '<table class="table" id="instrumentos_tabla" class="display" style="width:100%">

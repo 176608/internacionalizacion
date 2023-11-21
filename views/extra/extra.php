@@ -5,7 +5,7 @@ include('../../_assets/conn.php');
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <div class="container mt-3">
 
-<div class="accordion" id="accordionExample">
+<div class="accordion mb-3" id="accordionExample">
   <div class="accordion-item">
     <h2 class="accordion-header">
     <button id="paisesBoton" class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
