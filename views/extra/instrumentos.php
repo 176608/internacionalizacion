@@ -5,7 +5,7 @@ include('../../_assets/conn.php');
 
     ?>
 
-    <div class="container d-grid gap-2 mb-2"><button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Agregar Instrumento </button></div>
+    <div class="container d-grid gap-2 mb-2"><button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#crear_instrumento">Agregar Instrumento </button></div>
     
     <?php
 
@@ -44,6 +44,71 @@ include('../../_assets/conn.php');
     mysqli_close($conn);
 ?>
 
+<!-- Modal WIP -->
+<div class="modal fade" id="crear_instrumento" tabindex="-1" aria-labelledby="crear_instrumentoLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="crear_instrumentoLabel">Formulario para agregar intrumentos.</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        
+        <form id="crear_instrumento_form" action="" method="POST" class="row row-cols-lg-auto g-3 align-items-center">
+        <label class="visually-hidden" for="insert_instrumento">Instrumento</label>
+        <div class="input-group col-9">
+            <div class="input-group-text">Instrumento:</div>
+            <input type="text" class="form-control" id="insert_instrumento" name="insert_instrumento" placeholder="Escribe el Instrumento a agregar...">
+        </div>
+        <div class="btn-group" role="group" aria-label="btn-group">
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-success" onclick="enviar_ins()" data-bs-dismiss="modal">Enviar</button>
+        </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
     new DataTable('#instrumentos_tabla');
+
+    function enviar_ins() {
+    // Obtener el valor del input
+    var instrumento = document.getElementById('insert_instrumento').value;
+
+    // Verificar si el valor no está vacío
+    if (instrumento.trim() !== '') {
+        // Enviar los datos mediante AJAX
+        fetch('views/extra/procesar_formulario.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: 'insert_instrumento=' + encodeURIComponent(instrumento),
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error en la solicitud AJAX: ' + response.statusText);
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log(data);
+            // Puedes manejar la respuesta según tus necesidades
+        })
+        .catch(error => {
+            console.error('Error al enviar datos:', error);
+        })
+        .finally(() => {
+            // Recargar la página
+            location.reload();
+        });
+    } else {
+        console.error('El campo instrumento no puede estar vacío');
+    }
+}
+
 </script>

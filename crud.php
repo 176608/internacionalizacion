@@ -134,7 +134,11 @@ $(document).ready(function() {
         vista.classList.add('Active');
     }
 }*/
-
+/*
+function refresh_paises() {
+    // Recargar la DataTable usando ajax.reload()
+    var table = $('#paises_tabla').DataTable();
+    table.ajax.reload(null, false);}*/
 </script>
 
 <?php

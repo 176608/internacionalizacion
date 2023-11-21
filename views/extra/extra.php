@@ -21,7 +21,7 @@ include('../../_assets/conn.php');
   <div class="accordion-item">
     <h2 class="accordion-header">
       <button id="intrumentosBoton" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-        CRUD Intrumentos
+        CRUD Instrumentos
       </button>
     </h2>
     <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
@@ -98,8 +98,5 @@ $(document).ready(function() {
         });
     });
 });
-
-/*
-new DataTable('#tipos_tabla');*/
 </script>
 
