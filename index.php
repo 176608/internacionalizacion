@@ -17,7 +17,7 @@ $query = "SELECT id_consorcio, Siglas, Nombre, Enlace FROM consorcio";
 $resultado = mysqli_query($conn, $query);
 if ($resultado) {
 // Iniciar la tabla HTML
-echo '<table class="table">
+echo '<table class="table" id="test" class="display" style="width:100%">
         <thead>
             <tr>
                 <th scope="col">#ID</th>
@@ -49,6 +49,12 @@ mysqli_close($conn);
 ?>
 
 </div>
+
+<script>
+new DataTable('#test');
+
+</script>
+
 
 <?php
 include('views/footer.php');

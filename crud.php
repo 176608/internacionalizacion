@@ -60,6 +60,7 @@ include('_assets/conn.php');
       </li>
     </ul>
 
+    <!--Aqui comienza el visor CRUD de las entidades-->
 <div class="container-fluid" id="vistas">
 
 <ul class="nav nav-pills nav-flush flex-column mb-auto text-center" id="lista_selector">
