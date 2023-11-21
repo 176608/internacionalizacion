@@ -52,7 +52,6 @@ mysqli_close($conn);
 
 <script>
 new DataTable('#test');
-
 </script>
 
 
