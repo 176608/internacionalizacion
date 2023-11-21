@@ -26,8 +26,8 @@ if ($resultado_tipos) {
         echo '<tr>
                 <td>' . $fila['id_tipo_consorcio'] . '</td>
                 <td>' . $fila['tipo'] . '</td>
-                <td> <button onclick="editar(' . $fila['id_tipo_consorcio'] . ')">Editar</button> </td>
-                <td> <button onclick="eliminar(' . $fila['id_tipo_consorcio'] . ')">Eliminar</button> </td>
+                <td> <button onclick="editarTipo(' . $fila['id_tipo_consorcio'] . ')">Editar</button> </td>
+                <td> <button onclick="eliminarTipo(' . $fila['id_tipo_consorcio'] . ')">Eliminar</button> </td>
             </tr>';
     }
 
@@ -106,4 +106,27 @@ mysqli_close($conn);
   location.reload();
 }
 
+function eliminarTipo(idTipo) {
+  // Mostrar un mensaje de confirmación
+  if (confirm('¿Estás seguro de que deseas eliminar este Tipo de consorcio?')) {
+    // Realizar una solicitud AJAX para eliminar el Tipo en el servidor
+    fetch('views/extra/eliminar_tipo.php?id=' + idTipo, {
+      method: 'DELETE', // Puedes utilizar POST o DELETE según tu API
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Error al eliminar Tipo');
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log('Eliminación exitosa:', data);
+        // Recargar la tabla después de la eliminación
+        location.reload();
+      })
+      .catch(error => {
+        console.error('Error al eliminar Tipo:', error);
+      });
+  }
+}
 </script>

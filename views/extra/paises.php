@@ -24,8 +24,8 @@ if ($resultado_paises) {
         echo '<tr>
                 <td>' . $fila['id_pais'] . '</td>
                 <td>' . $fila['Pais'] . '</td>
-                <td> <button onclick="editar(' . $fila['id_pais'] . ')">Editar</button> </td>
-                <td> <button onclick="eliminar(' . $fila['id_pais'] . ')">Eliminar</button> </td>
+                <td> <button onclick="editarPais(' . $fila['id_pais'] . ')">Editar</button> </td>
+                <td> <button onclick="eliminarPais(' . $fila['id_pais'] . ')">Eliminar</button> </td>
             </tr>';
     }
 
@@ -109,5 +109,36 @@ mysqli_close($conn);
         console.error('Error al enviar datos:', error);
     });
 });
+
+ // Función para editar un país
+ function editarPais(idPais) {
+    // Puedes redirigir a una página de edición o abrir un modal con un formulario
+    console.log('Editar país con ID:', idPais);
+  }
+
+  // Función para eliminar un país
+  function eliminarPais(idPais) {
+  // Mostrar un mensaje de confirmación
+  if (confirm('¿Estás seguro de que deseas eliminar este país?')) {
+    // Realizar una solicitud AJAX para eliminar el país en el servidor
+    fetch('views/extra/eliminar_pais.php?id=' + idPais, {
+      method: 'DELETE', // Puedes utilizar POST o DELETE según tu API
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Error al eliminar país');
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log('Eliminación exitosa:', data);
+        // Recargar la tabla después de la eliminación
+        location.reload();
+      })
+      .catch(error => {
+        console.error('Error al eliminar país:', error);
+      });
+  }
+}
 
 </script>

@@ -28,7 +28,7 @@ include('../../_assets/conn.php');
                     <td>' . $fila['id_instrumento'] . '</td>
                     <td>' . $fila['instrumento'] . '</td>
                     <td> <button onclick="editar(' . $fila['id_instrumento'] . ')">Editar</button> </td>
-                    <td> <button onclick="eliminar(' . $fila['id_instrumento'] . ')">Eliminar</button> </td>
+                    <td> <button onclick="eliminar_instrumento(' . $fila['id_instrumento'] . ')">Eliminar</button> </td>
                 </tr>';
         }
 
@@ -111,4 +111,27 @@ include('../../_assets/conn.php');
     }
 }
 
+function eliminar_instrumento(idInstrumento) {
+  // Mostrar un mensaje de confirmación
+  if (confirm('¿Estás seguro de que deseas eliminar este instrumento de consorcio?')) {
+    // Realizar una solicitud AJAX para eliminar el instrumento en el servidor
+    fetch('views/extra/eliminar_instrumento.php?id=' + idInstrumento, {
+      method: 'DELETE', // Puedes utilizar POST o DELETE según tu API
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Error al eliminar instrumento');
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log('Eliminación exitosa:', data);
+        // Recargar la tabla después de la eliminación
+        location.reload();
+      })
+      .catch(error => {
+        console.error('Error al eliminar instrumento:', error);
+      });
+  }
+}
 </script>
