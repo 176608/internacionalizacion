@@ -6,7 +6,6 @@ include('_assets/conn.php');
 <!-- Cuerpo -->
 <div class="container-fluid">
  
-
 <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
   <symbol id="bootstrap" viewBox="0 0 118 94">
     <title>Bootstrap</title>
@@ -30,31 +29,33 @@ include('_assets/conn.php');
     <path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z"/>
   </symbol>
 </svg>
-
+<!--https://icons.getbootstrap.com/-->
 <main class="d-flex flex-nowrap">
     <ul class="nav nav-pills nav-flush flex-column mb-auto text-center" id="lista_selector">
       <li class="nav-item">
-        <a href="views/consorcio/consorcio.php" class="nav-link py-3 border-bottom rounded-0" aria-current="page" title="Consorcios" >
+        <a id="li-consorcio" href="views/consorcio/consorcio.php" onclick="cambiarClase(1)" class="nav-link py-3 border-bottom rounded-0" aria-current="page" title="Consorcios" >
           <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Consorcios"><use xlink:href="#home"/></svg>
         </a>
       </li>
       <li>
-        <a href="views/extra/extra.php"  class="nav-link py-3 border-bottom rounded-0" title="Extras" >
-          <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Extras"><use xlink:href="#speedometer2"/></svg>
+        <a id="li-extra" href="views/extra/extra.php" onclick="cambiarClase(2)"  class="nav-link py-3 border-bottom rounded-0" title="Extras" >
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" role="img" aria-label="Extras" class="bi bi-bank pe-none" viewBox="0 0 16 16">
+          <path d="m8 0 6.61 3h.89a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H15v7a.5.5 0 0 1 .485.38l.5 2a.498.498 0 0 1-.485.62H.5a.498.498 0 0 1-.485-.62l.5-2A.501.501 0 0 1 1 13V6H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 3h.89L8 0ZM3.777 3h8.447L8 1 3.777 3ZM2 6v7h1V6H2Zm2 0v7h2.5V6H4Zm3.5 0v7h1V6h-1Zm2 0v7H12V6H9.5ZM13 6v7h1V6h-1Zm2-1V4H1v1h14Zm-.39 9H1.39l-.25 1h13.72l-.25-1Z"/>
+        </svg>
         </a>
       </li>
       <li>
-        <a href="views/evento/evento.php" class="nav-link py-3 border-bottom rounded-0" title="Eventos" >
+        <a id="li-evento" href="views/evento/evento.php" onclick="cambiarClase(3)" class="nav-link py-3 border-bottom rounded-0" title="Eventos" >
           <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Eventos"><use xlink:href="#table"/></svg>
         </a>
       </li>
       <li>
-        <a href="views/ies/ies.php" class="nav-link py-3 border-bottom rounded-0" title="IES" >
+        <a id="li-ies" href="views/ies/ies.php" onclick="cambiarClase(4)" class="nav-link py-3 border-bottom rounded-0" title="IES" >
           <svg class="bi pe-none" width="24" height="24" role="img" aria-label="IES"><use xlink:href="#grid"/></svg>
         </a>
       </li>
       <li>
-        <a href="views/contacto/contacto.php" class="nav-link py-3 border-bottom rounded-0" title="Contactos" >
+        <a id="li-contacto" href="views/contacto/contacto.php" onclick="cambiarClase(5)" class="nav-link py-3 border-bottom rounded-0" title="Contactos" >
           <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Contactos"><use xlink:href="#people-circle"/></svg>
         </a>
       </li>
@@ -63,29 +64,31 @@ include('_assets/conn.php');
     <!--Aqui comienza el visor CRUD de las entidades-->
 <div class="container-fluid" id="vistas">
 
+<?php //echo $vista_actual;?>
+
 <ul class="nav nav-pills nav-flush flex-column mb-auto text-center" id="lista_selector">
       <li class="nav-item">
-        <a href="views/consorcio/consorcio.php" class="nav-link py-3 border-bottom rounded-0" aria-current="page" title="Consorcios" >
+        <a href="views/consorcio/consorcio.php" onclick="cambiarClase(1)" class="nav-link py-3 border-bottom rounded-0" aria-current="page" title="Consorcios" >
           <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Consorcios"><use xlink:href="#none"/></svg> Consorcios
         </a>
       </li>
       <li>
-        <a href="views/extra/extra.php"  class="nav-link py-3 border-bottom rounded-0" title="Extras" >
+        <a href="views/extra/extra.php"  onclick="cambiarClase(2)" class="nav-link py-3 border-bottom rounded-0" title="Extras" >
           <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Extras"><use xlink:href="#none"/></svg> Intrumentos, Paises, Tipo de Consorcios
         </a>
       </li>
       <li>
-        <a href="views/evento/evento.php" class="nav-link py-3 border-bottom rounded-0" title="Eventos" >
+        <a href="views/evento/evento.php" onclick="cambiarClase(3)" class="nav-link py-3 border-bottom rounded-0" title="Eventos" >
           <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Eventos"><use xlink:href="#none"/></svg> Eventos
         </a>
       </li>
       <li>
-        <a href="views/ies/ies.php" class="nav-link py-3 border-bottom rounded-0" title="IES" >
+        <a href="views/ies/ies.php" onclick="cambiarClase(4)" class="nav-link py-3 border-bottom rounded-0" title="IES" >
           <svg class="bi pe-none" width="24" height="24" role="img" aria-label="IES"><use xlink:href="#none"/></svg> IES, Campus, Departamentos
         </a>
       </li>
       <li>
-        <a href="views/contacto/contacto.php" class="nav-link py-3 border-bottom rounded-0" title="Contactos" >
+        <a href="views/contacto/contacto.php" onclick="cambiarClase(5)" class="nav-link py-3 border-bottom rounded-0" title="Contactos" >
           <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Contactos"><use xlink:href="#none"/></svg> Contactos
         </a>
       </li>
@@ -109,6 +112,29 @@ $(document).ready(function() {
         $("#vistas").load(vistaURL);
     });
 });
+/*function cambiarClase(opcion) {
+    // Obtén el elemento por su ID
+    var vista
+
+    // Agrega la clase correspondiente según la opción
+    if (opcion === 1) {
+      vista = document.getElementById("li-consorcio");
+        vista.classList.add('Active');
+    } else if (opcion === 2) {
+      vista = document.getElementById("li-extra");
+        vista.classList.add('Active');
+    }else if (opcion === 3) {
+      vista = document.getElementById("li-evento");
+        vista.classList.add('Active');
+    }else if (opcion === 4) {
+      vista = document.getElementById("li-ies");
+        vista.classList.add('Active');
+    }else if (opcion === 5) {
+      vista = document.getElementById("li-contacto");
+        vista.classList.add('Active');
+    }
+}*/
+
 </script>
 
 <?php

@@ -1,22 +1,19 @@
 <?php
 //echo "Estoy en consorcio.php"; 
 include('../../_assets/conn.php');
-echo '';
 
 ?>
 
 <div class="container-fluid">
   <div class="container">
-    <h2>Sección 1</h2>
-    <div class="btn-group" role="group" aria-label="Basic example">
-      <button type="button" class="btn btn-primary">Registrar 1</button>
-      <button type="button" class="btn btn-primary">Registrar 2</button>
+    <h2>Consorcios</h2>
+    <div class="btn-group" role="group" aria-label="btn-group">
+      <button type="button" class="btn btn-success">Agregar Consorcio</button>
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Launch demo modal WIP</button>
     </div>
   </div>
 
   <div class="container-fluid mt-3">
-    <h2>Sección 2</h2>
-
 <?php
     $query = "SELECT id_consorcio, Siglas, Nombre, Enlace FROM consorcio";
     $resultado = mysqli_query($conn, $query);
@@ -60,6 +57,24 @@ echo '';
   </div>
 </div>
 
+<!-- Modal WIP -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
 new DataTable('#consorcios');
