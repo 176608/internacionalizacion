@@ -95,7 +95,7 @@ mysqli_close($conn);
 $(document).ready(function() {
         $('.btn-editar-pais').click(function() {
             var idPais = $(this).data('bs-id');
-            console.log('entre1');
+            //console.log('entre1');
             // Realizar la solicitud AJAX
             $.ajax({
                 type: 'POST',
@@ -104,7 +104,7 @@ $(document).ready(function() {
                 success: function(response) {
                     // Actualizar el contenido del modal con la respuesta
                     $('#contenedor_editor').html(response);
-                    console.log('entre2');
+                    //console.log('entre2');
                 },
                 error: function(error) {
                     console.error('Error en la solicitud AJAX:', error);
