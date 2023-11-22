@@ -4,11 +4,10 @@ require '../../_assets/conn.php';
     $resultado_instrumentos = mysqli_query($conn, $query_instrumentos);
 
     ?>
-
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <div class="container d-grid gap-2 mb-2"><button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#crear_instrumento">Agregar Instrumento </button></div>
     
     <?php
-
     if ($resultado_instrumentos) {
         // Iniciar la tabla HTML
         echo '<table class="table" id="instrumentos_tabla" class="display" style="width:100%">
@@ -27,7 +26,7 @@ require '../../_assets/conn.php';
             echo '<tr>
                     <td>' . $fila['id_instrumento'] . '</td>
                     <td>' . $fila['instrumento'] . '</td>
-                    <td> <button onclick="editar(' . $fila['id_instrumento'] . ')">Editar</button> </td>
+                    <td> <button class="btn-editar-instrumento" data-bs-toggle="modal" data-bs-target="#modal_editar_instrumento" data-bs-id="' . $fila['id_instrumento'] . '">Editar</button> </td>
                     <td> <button onclick="eliminar_instrumento(' . $fila['id_instrumento'] . ')">Eliminar</button> </td>
                 </tr>';
         }
@@ -72,6 +71,19 @@ require '../../_assets/conn.php';
   </div>
 </div>
 
+<!--Modal_editar-->
+<div class="modal fade" id="modal_editar_instrumento" tabindex="-1" aria-labelledby="modal_editar_instrumentoLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Editar Instrumento</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="contenedor_editor"></div>
+        </div>
+    </div>
+</div>
+
 <script>
     new DataTable('#instrumentos_tabla');
 
@@ -110,6 +122,29 @@ require '../../_assets/conn.php';
         console.error('El campo instrumento no puede estar vacío');
     }
 }
+
+$(document).ready(function() {
+        $('.btn-editar-instrumento').click(function() {
+            var idInstrumento = $(this).data('bs-id');
+
+            // Realizar la solicitud AJAX
+            $.ajax({
+                type: 'POST',
+                url: 'get_instrumento.php',
+                data: { id: idInstrumento },
+                success: function(response) {
+                    // Actualizar el contenido del modal con la respuesta
+                    $('#contenedor_editor').html(response);
+
+                    // Mostrar el modal
+                    //$('#modal_editar_instrumento').modal('show');
+                },
+                error: function(error) {
+                    console.error('Error en la solicitud AJAX:', error);
+                }
+            });
+        });
+    });
 
 function eliminar_instrumento(idInstrumento) {
   // Mostrar un mensaje de confirmación

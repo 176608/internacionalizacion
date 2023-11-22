@@ -77,7 +77,7 @@ mysqli_close($conn);
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="views/extra/update_pais.php" method="post" enctype="multipart/form-data">
+                <form action="update_pais.php" method="post" enctype="multipart/form-data">
 
                     <input type="hidden" id="id_to_edit" name="id_to_edit" value="">
 

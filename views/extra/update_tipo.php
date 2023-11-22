@@ -7,7 +7,7 @@ $Pais = $conn->real_escape_string($_POST['inputPais']);
 
 $sql = "UPDATE pais SET Pais ='$Pais' WHERE id_pais='$id'";
 
-//var_dump($sql);
+var_dump($sql);
 
 if ($conn->query($sql)) {
 echo "Si";
