@@ -1,5 +1,5 @@
 <?php
-include('../../_assets/conn.php');
+require '../../_assets/conn.php';
 $query_tipos = "SELECT id_tipo_consorcio, tipo FROM consorcio_tipo";
 $resultado_tipos = mysqli_query($conn, $query_tipos);
 ?>
@@ -43,7 +43,7 @@ if ($resultado_tipos) {
 mysqli_close($conn);
 ?>
 
-<!-- Modal WIP -->
+<!-- Modal CREATE -->
 <div class="modal fade" id="crear_tipo" tabindex="-1" aria-labelledby="crear_tipoLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -81,7 +81,7 @@ mysqli_close($conn);
   // Verificar si el valor no está vacío
   if (tipo.trim() !== '') {
     // Enviar los datos mediante AJAX
-    fetch('views/extra/procesar_formulario.php', {
+    fetch('procesar_formulario.php', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -110,7 +110,7 @@ function eliminarTipo(idTipo) {
   // Mostrar un mensaje de confirmación
   if (confirm('¿Estás seguro de que deseas eliminar este Tipo de consorcio?')) {
     // Realizar una solicitud AJAX para eliminar el Tipo en el servidor
-    fetch('views/extra/eliminar_tipo.php?id=' + idTipo, {
+    fetch('eliminar_tipo.php?id=' + idTipo, {
       method: 'DELETE', // Puedes utilizar POST o DELETE según tu API
     })
       .then(response => {

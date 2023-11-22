@@ -1,7 +1,5 @@
 <?php
 include('head.php');
-// Inicializa la variable de control para el enlace activo
-//$enlaceActivo = 'visor';
 
 // Verifica si se ha enviado un formulario
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['enlace_elegido'])) {
@@ -9,11 +7,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['enlace_elegido'])) {
 
     // Redirecciona según el enlace seleccionado
     if ($enlaceActivo === 'crud') {
-        header("Location: crud.php");
+        header("Location: http://localhost/proyecto/internacionalizacion/crud.php");
         $enlaceActivo = 'crud';
         exit(); // Asegura que el script se detenga después de la redirección
     } elseif ($enlaceActivo === 'visor') {
-        header("Location: index.php");
+        header("Location: http://localhost/proyecto/internacionalizacion/index.php");
         $enlaceActivo = 'visor';
         exit(); // Asegura que el script se detenga después de la redirección
     }

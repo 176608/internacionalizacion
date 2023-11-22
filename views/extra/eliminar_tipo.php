@@ -1,5 +1,5 @@
 <?php
-include('../../_assets/conn.php');
+require '../../_assets/conn.php';
 
 // Verificar si se proporciona un ID válido
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {

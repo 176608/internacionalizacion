@@ -1,5 +1,5 @@
 <?php
-include('../../_assets/conn.php');
+require '../../_assets/conn.php';
 
 // Verificar si se envió alguna variable por POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

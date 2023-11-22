@@ -1,7 +1,7 @@
 <?php
 //echo "Estoy en consorcio.php"; 
-include('../../_assets/conn.php');
-
+require '../../_assets/conn.php';
+require '../header.php';
 ?>
 
 <div class="container-fluid">
@@ -75,6 +75,10 @@ include('../../_assets/conn.php');
     </div>
   </div>
 </div>
+
+<?php
+require '..//footer.php';
+?>
 
 <script>
 new DataTable('#consorcios');

@@ -1,5 +1,5 @@
 <?php
-include('../../_assets/conn.php');
+require '../../_assets/conn.php';
     $query_instrumentos = "SELECT id_instrumento, instrumento FROM consorcio_instrumento";
     $resultado_instrumentos = mysqli_query($conn, $query_instrumentos);
 
@@ -44,7 +44,7 @@ include('../../_assets/conn.php');
     mysqli_close($conn);
 ?>
 
-<!-- Modal WIP -->
+<!-- Modal CREATE -->
 <div class="modal fade" id="crear_instrumento" tabindex="-1" aria-labelledby="crear_instrumentoLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -82,7 +82,7 @@ include('../../_assets/conn.php');
     // Verificar si el valor no está vacío
     if (instrumento.trim() !== '') {
         // Enviar los datos mediante AJAX
-        fetch('views/extra/procesar_formulario.php', {
+        fetch('procesar_formulario.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
@@ -115,7 +115,7 @@ function eliminar_instrumento(idInstrumento) {
   // Mostrar un mensaje de confirmación
   if (confirm('¿Estás seguro de que deseas eliminar este instrumento de consorcio?')) {
     // Realizar una solicitud AJAX para eliminar el instrumento en el servidor
-    fetch('views/extra/eliminar_instrumento.php?id=' + idInstrumento, {
+    fetch('eliminar_instrumento.php?id=' + idInstrumento, {
       method: 'DELETE', // Puedes utilizar POST o DELETE según tu API
     })
       .then(response => {

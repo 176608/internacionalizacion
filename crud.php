@@ -1,6 +1,6 @@
 <?php
-include('views/header.php');
-include('_assets/conn.php');
+require 'views/header.php';
+require '_assets/conn.php';
 ?>
 
 <!-- Cuerpo -->
@@ -64,8 +64,6 @@ include('_assets/conn.php');
     <!--Aqui comienza el visor CRUD de las entidades-->
 <div class="container-fluid" id="vistas">
 
-<?php //echo $vista_actual;?>
-
 <ul class="nav nav-pills nav-flush flex-column mb-auto text-center" id="lista_selector">
       <li class="nav-item">
         <a href="views/consorcio/consorcio.php" class="nav-link py-3 border-bottom rounded-0" aria-current="page" title="Consorcios" >
@@ -100,6 +98,7 @@ include('_assets/conn.php');
 </div>
 
 <script>
+  /*
 $(document).ready(function() {
     // Manejar clic en elementos de la lista
     $("#lista_selector a").click(function(e) {
@@ -112,35 +111,8 @@ $(document).ready(function() {
         $("#vistas").load(vistaURL);
     });
 });
-/*function cambiarClase(opcion) {
-    // Obtén el elemento por su ID
-    var vista
-
-    // Agrega la clase correspondiente según la opción
-    if (opcion === 1) {
-      vista = document.getElementById("li-consorcio");
-        vista.classList.add('Active');
-    } else if (opcion === 2) {
-      vista = document.getElementById("li-extra");
-        vista.classList.add('Active');
-    }else if (opcion === 3) {
-      vista = document.getElementById("li-evento");
-        vista.classList.add('Active');
-    }else if (opcion === 4) {
-      vista = document.getElementById("li-ies");
-        vista.classList.add('Active');
-    }else if (opcion === 5) {
-      vista = document.getElementById("li-contacto");
-        vista.classList.add('Active');
-    }
-}*/
-/*
-function refresh_paises() {
-    // Recargar la DataTable usando ajax.reload()
-    var table = $('#paises_tabla').DataTable();
-    table.ajax.reload(null, false);}*/
 </script>
 
 <?php
-include('views/footer.php');
+require 'views/footer.php';
 ?>

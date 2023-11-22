@@ -1,5 +1,5 @@
 <?php
-include('../../_assets/conn.php');
+require '../../_assets/conn.php';
 $query_paises = "SELECT id_pais, Pais FROM pais";
 $resultado_paises = mysqli_query($conn, $query_paises); ?>
 
@@ -24,7 +24,7 @@ if ($resultado_paises) {
         echo '<tr>
                 <td>' . $fila['id_pais'] . '</td>
                 <td>' . $fila['Pais'] . '</td>
-                <td> <button onclick="editarPais(' . $fila['id_pais'] . ')">Editar</button> </td>
+                <td> <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal_editar_pais" data-bs-id="' . $fila['id_pais'] . '">Editar</button></td>
                 <td> <button onclick="eliminarPais(' . $fila['id_pais'] . ')">Eliminar</button> </td>
             </tr>';
     }
@@ -41,7 +41,7 @@ if ($resultado_paises) {
 mysqli_close($conn);
 ?>
 
-<!-- Modal WIP -->
+<!-- Modal CREATE -->
 <div class="modal fade" id="crear_Pais" tabindex="-1" aria-labelledby="crear_PaisLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -69,6 +69,35 @@ mysqli_close($conn);
   </div>
 </div>
 
+<div class="modal fade" id="modal_editar_pais" tabindex="-1" aria-labelledby="modal_editar_paisLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="modal_editar_paisLabel">Editar registro</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="views/extra/update_pais.php" method="post" enctype="multipart/form-data">
+
+                    <input type="hidden" id="id_to_edit" name="id_to_edit" value="">
+
+                    <div class="mb-2">
+                        <label for="inputPais" class="form-label">Pais:</label>
+                        <input type="text" name="inputPais" id="inputPais" class="form-control form-control-sm" required>
+                    </div>
+
+                    <div class="d-flex justify-content-end pt2">
+                        <button type="button" class="btn btn-secondary me-1" data-bs-dismiss="modal" onclick="putdown_modal()">Cerrar</button>
+                        <button type="submit" class="btn btn-primary ms-1" onclick="putdown_modal()" > Guardar</button>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
 <script>
     new DataTable('#paises_tabla');
 
@@ -76,22 +105,23 @@ mysqli_close($conn);
     location.reload();
     }
 
+    function putdown_modal() {
+        // Cerrar el modal
+        var modal = new bootstrap.Modal(document.getElementById('modal_editar_pais'));
+        modal.hide();
+    }
+
     document.getElementById('crear_pais_form').addEventListener('submit', function(event) {
     event.preventDefault();
-
     var formData = new FormData(this);
 
-    // Convertir FormData a objeto para imprimir
     var formObject = {};
     formData.forEach(function(value, key) {
         formObject[key] = value;
     });
 
-    // Mostrar los datos del formulario en la consola
-    //console.log(formObject);
-
     // Enviar los datos mediante AJAX
-    fetch('views/extra/procesar_formulario.php', {
+    fetch('procesar_formulario.php', {
         method: 'POST',
         body: formData
     })
@@ -110,35 +140,61 @@ mysqli_close($conn);
     });
 });
 
- // Función para editar un país
- function editarPais(idPais) {
-    // Puedes redirigir a una página de edición o abrir un modal con un formulario
-    console.log('Editar país con ID:', idPais);
-  }
+/*Para el modal Editar*/
+let modal_editar_pais = new bootstrap.Modal(document.getElementById('modal_editar_pais'));
 
-  // Función para eliminar un país
-  function eliminarPais(idPais) {
-  // Mostrar un mensaje de confirmación
-  if (confirm('¿Estás seguro de que deseas eliminar este país?')) {
-    // Realizar una solicitud AJAX para eliminar el país en el servidor
-    fetch('views/extra/eliminar_pais.php?id=' + idPais, {
-      method: 'DELETE', // Puedes utilizar POST o DELETE según tu API
+modal_editar_pais = document.getElementById('modal_editar_pais')
+
+modal_editar_pais.addEventListener('hide.bs.modal', event => {
+            modal_editar_pais.querySelector('.modal-body #inputPais').value = ""
+            //modal_editar_pais.querySelector('.modal-body #descripcion').value = ""
+        })
+
+modal_editar_pais.addEventListener('shown.bs.modal', event => {
+    let button = event.relatedTarget
+    let id = button.getAttribute('data-bs-id')
+    //let id = modal_editar_pais.querySelector('.modal-body #id_to_edit')
+    let inputPais = modal_editar_pais.querySelector('.modal-body #inputPais')
+    let url = "get_pais.php"
+    let formData = new FormData()
+    formData.append('id', id)
+    fetch(url, {
+        method: "POST",
+        body: formData
     })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Error al eliminar país');
-        }
-        return response.json();
-      })
-      .then(data => {
-        console.log('Eliminación exitosa:', data);
-        // Recargar la tabla después de la eliminación
-        location.reload();
-      })
-      .catch(error => {
-        console.error('Error al eliminar país:', error);
-      });
-  }
+    .then(response => response.json())
+    .then(data => {
+      //console.log(data);
+        id_to_edit.value = data.id_pais
+        inputPais.value = data.Pais
+    })
+    .catch(err => console.error('Error fetching data:', err));
+})
+
+
+// Función para eliminar un país
+function eliminarPais(idPais) {
+// Mostrar un mensaje de confirmación
+if (confirm('¿Estás seguro de que deseas eliminar este país?')) {
+  // Realizar una solicitud AJAX para eliminar el país en el servidor
+  fetch('eliminar_pais.php?id=' + idPais, {
+    method: 'DELETE', // Puedes utilizar POST o DELETE según tu API
+  })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Error al eliminar país');
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log('Eliminación exitosa:', data);
+      // Recargar la tabla después de la eliminación
+      location.reload();
+    })
+    .catch(error => {
+      console.error('Error al eliminar país:', error);
+    });
+}
 }
 
 </script>
