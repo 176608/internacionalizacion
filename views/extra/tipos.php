@@ -26,7 +26,7 @@ if ($resultado_tipos) {
         echo '<tr>
                 <td>' . $fila['id_tipo_consorcio'] . '</td>
                 <td>' . $fila['tipo'] . '</td>
-                <td> <button onclick="editarTipo(' . $fila['id_tipo_consorcio'] . ')">Editar</button> </td>
+                <td> <button class="btn-editar-tipo" data-bs-toggle="modal" data-bs-target="#modal_editar_tipo" data-bs-id="' . $fila['id_tipo_consorcio'] . '">Editar</button> </td>
                 <td> <button onclick="eliminarTipo(' . $fila['id_tipo_consorcio'] . ')">Eliminar</button> </td>
             </tr>';
     }
@@ -39,7 +39,6 @@ if ($resultado_tipos) {
     echo 'Error en la consulta: ' . mysqli_error($conn);
 }
 
-// Cerrar la conexión a la base de datos
 mysqli_close($conn);
 ?>
 
@@ -71,8 +70,24 @@ mysqli_close($conn);
   </div>
 </div>
 
+<!--Modal_editar-->
+<div class="modal fade" id="modal_editar_tipo" tabindex="-1" aria-labelledby="modal_editar_tipoLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Editar Tipo de consorcio</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="contenedor_editor"></div>
+        </div>
+    </div>
+</div>
+
 <script>
-    new DataTable('#tipos_tabla');
+   new DataTable('#tipos_tabla', {
+    lengthMenu: [ [10, 25, 50, 100], [10, 25, 50, 100] ], // Establece las opciones disponibles
+    pageLength: 100 // Establece el número de elementos por página por defecto
+});
 
     function enviarTipo() {
   // Obtener el valor del input
@@ -105,6 +120,29 @@ mysqli_close($conn);
   }
   location.reload();
 }
+
+$(document).ready(function() {
+        $('.btn-editar-tipo').click(function() {
+            var idTipo = $(this).data('bs-id');
+
+            // Realizar la solicitud AJAX
+            $.ajax({
+                type: 'POST',
+                url: 'get_tipo.php',
+                data: { id: idTipo },
+                success: function(response) {
+                    // Actualizar el contenido del modal con la respuesta
+                    $('#contenedor_editor').html(response);
+
+                    // Mostrar el modal
+                    //$('#modal_editar_tipo').modal('show');
+                },
+                error: function(error) {
+                    console.error('Error en la solicitud AJAX:', error);
+                }
+            });
+        });
+    });
 
 function eliminarTipo(idTipo) {
   // Mostrar un mensaje de confirmación
